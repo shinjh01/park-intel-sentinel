@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class RobotPosUI : MonoBehaviour
 {
@@ -13,16 +12,26 @@ public class RobotPosUI : MonoBehaviour
         parkingSpots.SetParkingSpotColor(floor, zone_name, rfid_tag);
     }
 
-    // 주차장 주차 현황 및 로봇 위치 표시
-    public void RobotPos(RobotPosData robotPos)
-    {
-        parkingSpots.DisplayParkingStatus(robotPos);
-    }
-
+    // 창 닫을 때 주차칸 모두 원래 색으로
     public void ResetColor()
     {
         parkingSpots.ResetAllParkingSpotsColor();
     }
+
+    // 주차장 주차 현황 및 로봇 위치 표시
+    public void RobotPos(RobotPosData robotPos)
+    {
+        Debug.Log("========== DisplayParkingStatus 실행 ==========");
+
+        parkingSpots.DisplayParkingStatus(robotPos);
+    }
+
+    private void GetLatestPos()
+    {
+        
+    }
+
+    
 
 
 

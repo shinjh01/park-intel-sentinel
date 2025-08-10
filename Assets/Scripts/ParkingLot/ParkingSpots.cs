@@ -59,7 +59,6 @@ public class ParkingSpots : MonoBehaviour
     // 주차칸의 색상 정보를 초기에 저장
     private void SaveOriginColor()
     {
-        Debug.LogWarning($"색상 저장");
         foreach (var sensorData in allSensors)
         {
             if (sensorData.zones != null)
@@ -114,31 +113,9 @@ public class ParkingSpots : MonoBehaviour
         }
     }
 
-    // 깜빡이는 효과를 위한 코루틴 메소드
-    private IEnumerator BlinkColor(GameObject targetZone, Color blinkColor, float interval)
-    {
-        MeshRenderer meshRenderer = targetZone.GetComponent<MeshRenderer>();
-        Color originalColor = originalColors[targetZone]; // 미리 저장해둔 원래 색상
-
-        if (meshRenderer == null) yield break;
-
-        while (true)
-        {
-            // 빨간색으로 변경
-            meshRenderer.material.color = blinkColor;
-            yield return new WaitForSeconds(interval); // 지정된 시간(interval)만큼 대기
-
-            // 원래 색상으로 변경
-            meshRenderer.material.color = originalColor;
-            yield return new WaitForSeconds(interval);
-        }
-    }
-
     // 차량 주차된 칸 빨간색 표시
     public void SetParkingSpotColor(int floor, string zone_name, string rfid_tag)
     {
-        Debug.Log($"floor: {floor}, zone_name: {zone_name}, rfid_tag: {rfid_tag}");
-
         // 딕셔너리에서 센서 ID(rfid_tag)를 키로 사용하여 SensorData를 바로 찾음
         if (sensorIdToData.TryGetValue(rfid_tag, out SensorData sensor))
         {
@@ -173,6 +150,26 @@ public class ParkingSpots : MonoBehaviour
         else
         {
             Debug.LogWarning($"RFID 태그 '{rfid_tag}'에 해당하는 센서를 찾을 수 없습니다.");
+        }
+    }
+
+    // 깜빡이는 효과를 위한 코루틴 메소드
+    private IEnumerator BlinkColor(GameObject targetZone, Color blinkColor, float interval)
+    {
+        MeshRenderer meshRenderer = targetZone.GetComponent<MeshRenderer>();
+        Color originalColor = originalColors[targetZone]; // 미리 저장해둔 원래 색상
+
+        if (meshRenderer == null) yield break;
+
+        while (true)
+        {
+            // 빨간색으로 변경
+            meshRenderer.material.color = blinkColor;
+            yield return new WaitForSeconds(interval); // 지정된 시간(interval)만큼 대기
+
+            // 원래 색상으로 변경
+            meshRenderer.material.color = originalColor;
+            yield return new WaitForSeconds(interval);
         }
     }
 
@@ -220,7 +217,7 @@ public class ParkingSpots : MonoBehaviour
                 {
                     // 디버그 로그를 먼저 출력하여 모든 데이터를 확인합니다.
                     // plate_text가 비어있든 아니든 로그는 항상 출력됩니다.
-                    Debug.Log($"[DisplayParkingStatus] Processing vehicle. RFID: {rfid_tag}, Zone: {vehicle.name}, Plate: '{vehicle.plate_text}', Car Type: {vehicle.car_type ?? "null"}");
+                    // Debug.Log($"[DisplayParkingStatus] Processing vehicle. RFID: {rfid_tag}, Zone: {vehicle.name}, Plate: '{vehicle.plate_text}', Car Type: {vehicle.car_type ?? "null"}");
 
                     // plate_text가 비어있지 않으면 (차량이 있으면)
                     if (!string.IsNullOrEmpty(vehicle.plate_text))
@@ -254,7 +251,7 @@ public class ParkingSpots : MonoBehaviour
                     if (vehicle != null)
                     {
                         vehicle.SetActive(true);
-                        Debug.Log($"-> Successfully activated vehicle for Zone: {zone_name}");
+                        // Debug.Log($"-> Successfully activated vehicle for Zone: {zone_name}");
                     }
                 }
             }
@@ -277,7 +274,7 @@ public class ParkingSpots : MonoBehaviour
                     if (vehicle != null)
                     {
                         vehicle.SetActive(false); // 오브젝트 비활성화
-                        Debug.Log($"-> Successfully deactivated vehicle for Zone: {zone_name}");
+                        // Debug.Log($"-> Successfully deactivated vehicle for Zone: {zone_name}");
                     }
                 }
             }

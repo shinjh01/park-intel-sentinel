@@ -26,7 +26,7 @@ public class APIManager : MonoBehaviour
     private string apiPath;             // api 경로 변수
     private string jsonResponse;        // 응답 문자열 변수
 
-    private const float newNotiInterval = 60f;      // 새 알림 자동 조회 간격 (초)
+    private const float newNotiInterval = 5f;      // 새 알림 자동 조회 간격 (초)
     private Coroutine newNotiCoroutine;             // 새 알림 코루틴
 
     private int alert_id;  // 삭제할 차량 알림 id
@@ -53,14 +53,14 @@ public class APIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 새 알림을 1분마다 자동 조회하는 코루틴
+    /// 새 알림을 5초마다 자동 조회하는 코루틴
     /// </summary>
     private IEnumerator CheckNewNotiCoroutine()
     {
         while (true)
         {
             RequestNewNoti();
-
+            RequestRobotPos();
             yield return new WaitForSeconds(newNotiInterval);
         }
     }
@@ -106,7 +106,7 @@ public class APIManager : MonoBehaviour
     }
 
     /* --- 3. 알림 상세 API 요청 (GET) --- */
-    public void RequestNotiDetail(int alertID)
+    public void RequestNotiDetail(int alertID, string reason)
     {
         if (notiDetailRequestCoroutine != null)
         {
@@ -119,7 +119,7 @@ public class APIManager : MonoBehaviour
             var response = JsonParser.ParseJson<ApiResponse<NotiDetailData>>(jsonResponse);
             if (response != null && response.data != null)
             {
-                uiManager.NotiDetailUI(response.data);
+                uiManager.NotiDetailUI(response.data, reason);
             }
         }));
     }

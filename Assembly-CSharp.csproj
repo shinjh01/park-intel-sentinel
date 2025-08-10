@@ -69,7 +69,7 @@
     <Compile Include="Assets/Imports/SlimUI/Modern Menu 1/Scripts/Misc/ExtraLinks.cs" />
     <Compile Include="Assets/Scripts/API/FastApiClient.cs" />
     <Compile Include="Assets/Imports/SlimUI/Modern Menu 1/Scripts/ThemeEditor/ThemedUIData.cs" />
-    <Compile Include="Assets/Scripts/UI/MenuUI.cs" />
+    <Compile Include="Assets/Scripts/UI/VehiclePosUI.cs" />
     <Compile Include="Assets/Imports/SlimUI/Modern Menu 1/Scripts/Misc/ResetDemo.cs" />
     <Compile Include="Assets/Imports/SlimUI/Modern Menu 1/Scripts/Audio/CheckMusicVolume.cs" />
     <Compile Include="Assets/Imports/SlimUI/Modern Menu 1/Scripts/Managers/UIMenuManager.cs" />

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Text;
 
 public class NewNotiUI : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class NewNotiUI : MonoBehaviour
 
     public void NewNoti(NewNotiListData newNotiListData)
     {
-        Debug.Log("NewNoti 실행");
+        Debug.Log("========== NewNoti 실행 ==========");
 
         List<NotiData> list = newNotiListData?.logs;
 

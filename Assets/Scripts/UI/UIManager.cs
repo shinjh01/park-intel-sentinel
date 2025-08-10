@@ -12,22 +12,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] NewNotiUI newNotiUI;
     [SerializeField] NotiListUI notiListUI;
     [SerializeField] NotiDetailUI notiDetailUI;
+    [SerializeField] GameObject popupBlocker;
     [SerializeField] GameObject popupUI;
     [SerializeField] RobotPosUI robotPosUI;
-    [SerializeField] GameObject popupBlocker;
-    [SerializeField] GameObject resetButton;
 
     private void Awake()
     {
         ShowMenuUI();
     }
 
+
     /* 1. 새 알림 UI */
     public void NewNotiUI(NewNotiListData newNotiList)
     {
-        ShowMenuUI();
         newNotiUI.NewNoti(newNotiList);
     }
+
 
     /* 2. 주차 위반 리스트 UI */
     public void NotiListUI(AllNotiListData allNotiList)
@@ -39,47 +39,40 @@ public class UIManager : MonoBehaviour
     {
         APIManager.Instance?.RequestNotiList();
     }
+
     
     /* 3. 위반 차량 상세 UI */
-    public void NotiDetailUI(NotiDetailData notiDetail)
+    public void NotiDetailUI(NotiDetailData notiDetail, string reason)
     {
         ShowNotiDetailUI();
-        notiDetailUI.NotiDetail(notiDetail);
+        notiDetailUI.NotiDetail(notiDetail, reason);
     }
+
 
     /* 4. 위반 차량 삭제 UI */
     public void PatchNotiUI(int alertID)
     {
         // patchNotiUI.PatchNoti(alertID);
     }
+
     
     /* 5. 로봇 위치 조회 UI */
     public void RobotPosUI(RobotPosData robotPos)
     {
         robotPosUI.RobotPos(robotPos);
     }
-    public void RobotPosPopupUI()
-    {
-        popupUI.SetActive(true);
-        popupBlocker.SetActive(true);
-        resetButton.SetActive(true);
-    }
-    public void OnClickRobotPosBtn()
-    {
-        APIManager.Instance?.RequestRobotPos();
-    }
 
-    // 차량 상세 - 차량 위치 표시
+
+    /* 차량 상세 - 차량 위치 표시 */
     public void VehiclePosUI(int floor, string zone_name, string rfid_tag)
     {
-        popupUI.SetActive(true);
         popupBlocker.SetActive(true);
-        resetButton.SetActive(false);
+        popupUI.SetActive(true);
         robotPosUI.VehiclePos(floor, zone_name, rfid_tag);
-        
     }
 
-    private void ShowMenuUI()
+
+    public void ShowMenuUI()
     {
         menuUI.SetActive(true);
         notiListUI.gameObject.SetActive(false);
@@ -104,6 +97,12 @@ public class UIManager : MonoBehaviour
         notiDetailUI.gameObject.SetActive(true);
         popupUI.SetActive(false);
         popupBlocker.SetActive(false);
+    }
+
+    public void OpenPopupUI()
+    {
+        popupUI.SetActive(true);
+        popupBlocker.SetActive(true);
     }
 
     public void ClosePopupUI()

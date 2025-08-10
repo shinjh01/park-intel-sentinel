@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class NotiListUI : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class NotiListUI : MonoBehaviour
 
     public void NotiList(AllNotiListData allNotiListData)
     {
-        Debug.Log("NotiList 실행");
+        Debug.Log("========== NotiList 실행 ==========");
 
         foreach (Transform child in rowParent)
         {
@@ -19,7 +18,7 @@ public class NotiListUI : MonoBehaviour
         }
 
         List<NotiData> list = allNotiListData?.data;
-        
+
         if (list != null && list.Count > 0)
         {
             foreach (var notiData in list)
@@ -39,10 +38,6 @@ public class NotiListUI : MonoBehaviour
         }
     }
 
-    // BackButton, HomeButton
-    public void OnClickBtn()
-    {
-        APIManager.Instance?.RequestNewNoti();
-    }
+    
 
 }
