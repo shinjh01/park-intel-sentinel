@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "park-intel-sentinel.sln"
+    "dotnet.defaultSolution": "PIS.sln"
 }

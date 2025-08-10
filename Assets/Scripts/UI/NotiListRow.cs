@@ -26,7 +26,7 @@ public class NotiListRow : MonoBehaviour
 
     public void OnClickNotiDetailBtn()
     {
-        APIManager.Instance?.RequestRobotPos();
+        // APIManager.Instance?.RequestRobotPos();
         APIManager.Instance?.RequestNotiDetail(alertID);
     }
 

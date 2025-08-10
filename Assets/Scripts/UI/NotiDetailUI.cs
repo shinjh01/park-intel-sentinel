@@ -19,19 +19,19 @@ public class NotiDetailUI : MonoBehaviour
     {
         Debug.Log("NotiDetail 실행");
 
-        floor.text = $"층\t|\t{notiDetailData.floor.ToString()}";
-        zone.text = $"구역\t|\t{notiDetailData.name}";
-        plateNumber.text = $"차량 번호\t|\t{notiDetailData.plate_text}";
-        violationType.text = $"위반 사항\t|\t{notiDetailData.reason}";
+        floor.text = $"{notiDetailData.floor.ToString()}";
+        zone.text = $"{notiDetailData.name}";
+        plateNumber.text = $"{notiDetailData.plate_text}";
+        violationType.text = $"{notiDetailData.reason}";
 
         if (notiDetailData.entered_at.HasValue)
         {
             string formattedTime = notiDetailData.entered_at.Value.ToString("yyyy-MM-dd HH:mm");
-            enterTime.text = $"입차 시간\t|\t{formattedTime}";
+            enterTime.text = $"{formattedTime}";
         }
         else
         {
-            enterTime.text = "입차 시간\t|\tnull";
+            enterTime.text = "null";
         }
 
         floor_param = notiDetailData.floor;
